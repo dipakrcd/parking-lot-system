@@ -1,5 +1,8 @@
 class CarsController < ApplicationController
-
+  def index
+    @car = Car.all
+  end
+  
   def registration_numbers_by_color
     color = params[:color]
     cars = Car.where(color: color)
@@ -21,5 +24,5 @@ class CarsController < ApplicationController
       render json: { message: "no cars available with #{color} color" }
     end
   end 
-  
+
 end

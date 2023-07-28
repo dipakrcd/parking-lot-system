@@ -1,0 +1,65 @@
+<h1> Parking slot application </h1>
+<body>
+<div>
+  <div>
+    <table>
+        <% @parking_slots.each_slice(6) do |parking_slot_per_row| %>
+        <tr>
+            <% parking_slot_per_row.each do |parking_slot| %>
+              <% if parking_slot.is_empty %>
+                <td style="background-color: red; color: white;border: solid black;">
+                  <%= parking_slot.id %>
+                </td>
+              <%else%>
+                <td>
+                  <%= parking_slot.id %>
+                </td>
+              <%end%>  
+            
+            <% end %>
+        </tr>
+        <% end %>
+    </table>
+  </div> 
+  <div>
+    <h2>Park a Car</h2>
+    <%= form_tag(park_car_parking_slots_path, method: "post") do %>
+      <div>
+        <%= label_tag(:registration_number, "Car Registration Number:") %>
+        <%= text_field_tag(:registration_number) %>
+      </div>
+    
+      <div>
+        <%= label_tag(:color, "Car Color:") %>
+        <%= text_field_tag(:color) %>
+      </div>
+    
+      <%= submit_tag("Park Car") %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<style>
+table {
+    border-collapse: collapse;
+    width: 600px;
+    margin: 0 auto;
+  }
+
+  td {
+    padding: 40px;
+    text-align: center;
+    border: 1px solid red;
+  }
+
+  th {
+    padding: 8px;
+    text-align: center;
+    border: 1px solid red;
+    background-color: #f2f2f2;
+  }
+</style>
+</body>
+
