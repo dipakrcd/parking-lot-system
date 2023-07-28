@@ -22,7 +22,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_28_053309) do
     t.boolean "is_empty", default: false
     t.integer "x_coordinate"
     t.integer "y_coordinate"
-    t.decimal "distance_from_entry_point"
+    t.float "distance_from_entry_point"
     t.integer "car_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

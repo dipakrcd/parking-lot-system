@@ -4,7 +4,7 @@ class CreateParkingSlots < ActiveRecord::Migration[7.0]
       t.boolean :is_empty, default: false
       t.integer :x_coordinate
       t.integer :y_coordinate
-      t.decimal :distance_from_entry_point
+      t.float :distance_from_entry_point
       t.references :car, foreign_key: true
       t.timestamps
     end
