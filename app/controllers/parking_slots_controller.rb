@@ -1,5 +1,4 @@
 class ParkingSlotsController < ApplicationController
-  skip_before_action :verify_authenticity_token
 
   def index 
     @parking_slots = ParkingSlot.all
@@ -7,13 +6,13 @@ class ParkingSlotsController < ApplicationController
 
   def park_car
     car_registration_number = params[:registration_number]
-    car_color = params[:color]
+    car = Car.find_by(registration_number: car_registration_number)
     parking_slot_id = find_nearest_distance
-    car = Car.new(registration_number: car_registration_number, color: car_color)
-    if car.save
+    if !is_parked?(car)
       if parking_slot_id
+        ticket = Ticket.create(car_id: car.id)
         parking_slot = ParkingSlot.find(parking_slot_id)
-        car_parked_at_parking_slot = parking_slot.update(is_empty: true,car_id: car.id) 
+        car_parked_at_parking_slot = parking_slot.update(is_empty: true,ticket_id: ticket.id)
         flash[:notice] = "Car Parked"
         redirect_to parking_slots_path
       else
@@ -21,7 +20,7 @@ class ParkingSlotsController < ApplicationController
         redirect_to parking_slots_path
       end
     else
-      flash[:error] = car.errors.full_messages
+      flash[:alert] = "Car is already parked"
       redirect_to parking_slots_path
     end
   end
@@ -37,15 +36,25 @@ class ParkingSlotsController < ApplicationController
 
   def remove_car
     car_registration_number = params[:registration_number]
-    car = Car.find_by(registration_number: car_registration_number )
-    parking_slot = ParkingSlot.where(car_id: car.id) if car.present?
-    if car.present? && parking_slot.present?
-      parking_slot.update(is_empty: false,car_id: nil)
+    car = Car.find_by(registration_number: car_registration_number)
+    ticket = car.ticket.where(is_car_parked: true).first
+    if car.present? && ticket.present?
+      ticket.update(is_car_parked: false)
+      ticket.parking_slot.update(is_empty: false,ticket_id: nil)
       flash[:notice] = "Car removed from parking slot"
       redirect_to parking_slots_path
     else
       flash[:notice] = "Car with Registration_number not parked"
       redirect_to parking_slots_path
+    end
+  end
+
+  def is_parked?(car)
+    ticket = Ticket.where(car_id: car.id,is_car_parked: true)
+    if ticket.present?
+      return true
+    else
+      return false
     end
   end
 

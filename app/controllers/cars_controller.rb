@@ -2,6 +2,19 @@ class CarsController < ApplicationController
   def index
     @car = Car.all
   end
+
+  def new 
+    @car = Car.new
+  end
+
+  def create
+    @car = Car.new(car_params)
+    if @car.save
+      redirect_to parking_slots_path
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
   
   def registration_numbers_by_color
     color = params[:color]
@@ -24,5 +37,11 @@ class CarsController < ApplicationController
       render json: { message: "no cars available with #{color} color" }
     end
   end 
+
+  private
+
+  def car_params
+    params.require(:car).permit(:registration_number, :color)
+  end
 
 end

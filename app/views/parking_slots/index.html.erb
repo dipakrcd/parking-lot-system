@@ -4,6 +4,7 @@
   <div>
     <%= flash[:notice] %>
     <%= flash[:alert] %>
+    <%= link_to "Create a Car", new_car_path %><br>
   </div>
   <div>
     <table>
@@ -12,7 +13,7 @@
             <% parking_slot_per_row.each do |parking_slot| %>
               <% if parking_slot.is_empty %>
                 <td style="background-color: red; color: white;border: solid black;">
-                  <%= parking_slot.car.registration_number %>
+                  <%= parking_slot.ticket.car.registration_number %>
                 </td>
               <%else%>
                 <td>
@@ -24,7 +25,8 @@
         </tr>
         <% end %>
     </table>
-  </div> 
+  </div>
+
   <div>
     <h2>Park a Car</h2>
     <%= form_tag(park_car_parking_slots_path, method: "post") do %>
@@ -32,16 +34,10 @@
         <%= label_tag(:registration_number, "Car Registration Number:") %>
         <%= text_field_tag(:registration_number) %>
       </div>
-    
-      <div>
-        <%= label_tag(:color, "Car Color:") %>
-        <%= text_field_tag(:color) %>
-      </div>
-
-      <%= flash[:error] %>
       <%= submit_tag("Park Car") %>
     <% end %>
   </div>
+
   <div>
     <h2>remove car</h2>
     <%= form_tag(remove_car_parking_slots_path, method: "delete") do %>
@@ -52,6 +48,7 @@
       <%= submit_tag("Remove Car") %>
     <% end %>  
   </div>
+
 </div>
 
 

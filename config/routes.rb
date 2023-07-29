@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       delete 'remove_car'
     end
   end
+  resources :cars
   get 'cars/registration_numbers_by_color', to: 'cars#registration_numbers_by_color'
   get 'cars/ticket_numbers_of_particular_color', to: 'cars#ticket_numbers_of_particular_color'
 end

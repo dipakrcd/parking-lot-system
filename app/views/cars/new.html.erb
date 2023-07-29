@@ -1,0 +1,29 @@
+<h1>create a car</h1>
+<%= form_with model: @car do |form| %>
+  <div>
+    <%= form.label :registration_number %><br>
+    <%= form.text_field :registration_number %>
+    <% @car.errors.full_messages_for(:registration_number).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :color %><br>
+    <%= form.text_area :color %><br>
+    <% @car.errors.full_messages_for(:color).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
+
+
+
+
