@@ -2,6 +2,10 @@
 <body>
 <div>
   <div>
+    <%= flash[:notice] %>
+    <%= flash[:alert] %>
+  </div>
+  <div>
     <table>
         <% @parking_slots.each_slice(6) do |parking_slot_per_row| %>
         <tr>
@@ -33,7 +37,7 @@
         <%= label_tag(:color, "Car Color:") %>
         <%= text_field_tag(:color) %>
       </div>
-    
+      <%= flash[:error] %>
       <%= submit_tag("Park Car") %>
     <% end %>
   </div>
