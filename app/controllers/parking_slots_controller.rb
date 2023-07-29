@@ -35,4 +35,18 @@ class ParkingSlotsController < ApplicationController
     end
   end 
 
+  def remove_car
+    car_registration_number = params[:registration_number]
+    car = Car.find_by(registration_number: car_registration_number )
+    parking_slot = ParkingSlot.where(car_id: car.id) if car.present?
+    if car.present? && parking_slot.present?
+      parking_slot.update(is_empty: false,car_id: nil)
+      flash[:notice] = "Car removed from parking slot"
+      redirect_to parking_slots_path
+    else
+      flash[:notice] = "Car with Registration_number not parked"
+      redirect_to parking_slots_path
+    end
+  end
+
 end

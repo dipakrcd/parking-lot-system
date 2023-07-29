@@ -12,7 +12,7 @@
             <% parking_slot_per_row.each do |parking_slot| %>
               <% if parking_slot.is_empty %>
                 <td style="background-color: red; color: white;border: solid black;">
-                  <%= parking_slot.id %>
+                  <%= parking_slot.car.registration_number %>
                 </td>
               <%else%>
                 <td>
@@ -37,9 +37,20 @@
         <%= label_tag(:color, "Car Color:") %>
         <%= text_field_tag(:color) %>
       </div>
+
       <%= flash[:error] %>
       <%= submit_tag("Park Car") %>
     <% end %>
+  </div>
+  <div>
+    <h2>remove car</h2>
+    <%= form_tag(remove_car_parking_slots_path, method: "delete") do %>
+      <div>
+        <%= label_tag(:registration_number, "Car Resgistration Number") %>
+        <%= text_field_tag(:registration_number) %> 
+      </div>
+      <%= submit_tag("Remove Car") %>
+    <% end %>  
   </div>
 </div>
 
