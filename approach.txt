@@ -1,0 +1,31 @@
+parking Lot System(working of project)
+- The technology used to develop the application is Ruby on Rails Framework. Because of Ruby on Rails is easy to learn and used 
+for fast development
+
+steps followed :- 
+- In parking Lot System, the Parking Slots is created using seed file with creating x_co-ordinates, y_co-ordinates ,and distance 
+ from the entry points saved in database. 
+
+ - The entry points taken as x_co-ordinate as 0 and y_co-ordinate as 0. and finding the all distances from the entry points. And save
+ that distance in database by running seed file . 
+
+ - The distances from the entry points are calculted using pythagoras theoram and all distances from the entry points are calculated
+  digologically
+
+ - We have to set Total Number of slots and number of slots available per row in ParkingSlot model. So that the design of parking 
+ slots is creted on views.
+
+ - To park a car in paking slot , we have to first register car into the system. After car is registered in the system, we can park that 
+ car and then new ticket for that car is generated and assigned nearest slot to that car. 
+
+ - relations for Parking Lot System is - 1 car has_many tickets 
+                                         1 tickets has_one paking_slot
+
+Model Used in project
+- Car
+- Ticket
+- ParkingSlot
+
+Testing of Project 
+- For test Parking Lot System I used Rspec gem to test controllers and models. 
+

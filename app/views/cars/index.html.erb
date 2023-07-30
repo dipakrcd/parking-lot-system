@@ -1,0 +1,56 @@
+<%= flash[:notice] %>
+ <%= form_tag(cars_path, method: "get") do %>
+    <div>
+      <%= label_tag(:color, "color") %>
+      <%= text_field_tag(:color) %> 
+    </div>
+    <%= submit_tag("serach car") %>
+<% end %>  
+
+<h2>cars serach by color</h2>
+
+<% if @cars.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Registration Number</th>
+        <th>Color</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @cars.each do |car| %>
+        <tr>
+          <td><%= car.registration_number %></td>
+          <td><%= car.color %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <% if params[:color].present? %>
+    <p>No cars found with the color '<%= params[:color] %>'.</p>
+  <% end %>
+<% end %>
+
+
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: %;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+</style>
