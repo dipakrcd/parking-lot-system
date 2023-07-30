@@ -19,7 +19,7 @@ class ParkingSlotsController < ApplicationController
           ticket = Ticket.create(car_id: car.id)
           parking_slot = ParkingSlot.find(parking_slot_id)
           car_parked_at_parking_slot = parking_slot.update(is_empty: true,ticket_id: ticket.id)
-          flash[:notice] = "Car Parked"
+          flash[:notice] = "Car Parked at slot number #{parking_slot_id}"
           redirect_to parking_slots_path
         else
           flash[:alert] = "No space avaibale to park car"
