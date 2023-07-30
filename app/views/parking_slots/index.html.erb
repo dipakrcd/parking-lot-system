@@ -1,12 +1,26 @@
-<h1> Parking slot application </h1>
+<div style = "display: flex; gap: 2rem;">
+     <span style="font-weight: bold; font-size: 30px;" >Parking slot application</span>
+     <%=  link_to "Create a Car", new_car_path, style: "display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; text-decoration: none;"%><br>
+</div>
+
 <body>
-<div>
-  <div>
     <%= flash[:notice] %>
     <%= flash[:alert] %>
-    <%= link_to "Create a Car", new_car_path %><br>
+
+<div style = "display: flex; gap: 5rem ;" >
+  
+  <div style="margin-top: 10%; border: 2px solid #ccc; padding: 10px; margin-bottom: 10%;">
+    <h2>Park a Car</h2>
+    <%= form_tag(park_car_parking_slots_path, method: "post") do %>
+      <div>
+        <%= label_tag(:registration_number, "Car Registration Number:") %>
+        <%= text_field_tag(:registration_number) %>
+      </div>
+      <%= submit_tag("Park Car") %>
+    <% end %>
   </div>
-  <div>
+  
+  <div style="margin-top: 3%">
     <table>
         <% @parking_slots.each_slice(6) do |parking_slot_per_row| %>
         <tr>
@@ -27,18 +41,7 @@
     </table>
   </div>
 
-  <div>
-    <h2>Park a Car</h2>
-    <%= form_tag(park_car_parking_slots_path, method: "post") do %>
-      <div>
-        <%= label_tag(:registration_number, "Car Registration Number:") %>
-        <%= text_field_tag(:registration_number) %>
-      </div>
-      <%= submit_tag("Park Car") %>
-    <% end %>
-  </div>
-
-  <div>
+  <div style="margin-top: 10%; border: 2px solid #ccc; padding: 10px; margin-bottom: 10%;">
     <h2>remove car</h2>
     <%= form_tag(remove_car_parking_slots_path, method: "delete") do %>
       <div>
