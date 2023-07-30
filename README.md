@@ -5,20 +5,23 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version - 3.2.2
 
-* System dependencies
+* Rails version - 7.0.6
 
-* Configuration
+* clone repositories
+   git clone https://github.com/dipakrcd/parking-lot-system.git
 
-* Database creation
+* Go to the project directory.
+  cd parking-lot-system
 
-* Database initialization
+* install depedencies
+  bundle install
 
-* How to run the test suite
+* database setup 
+  rails db:create 
+  rails db:migrate
+  rails db:seed
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+*start the server
+  rails s 
