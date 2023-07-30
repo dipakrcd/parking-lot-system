@@ -1,6 +1,12 @@
 class CarsController < ApplicationController
   def index
-    @car = Car.all
+    if params[:color].present?
+      @cars = Car.where(color: params[:color])
+      if @cars.empty?
+        flash[:notice] = "No cars found with the color '#{params[:color]}'."
+        redirect_to cars_path  
+      end
+    end
   end
 
   def new 
@@ -15,17 +21,7 @@ class CarsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
-  
-  def registration_numbers_by_color
-    color = params[:color]
-    cars = Car.where(color: color)
-    if cars.present?
-        registration_numbers = cars.pluck(:registration_number)
-        render json: { registration_numbers: registration_numbers }
-    else
-        render json: { message: "no cars available with #{color} color" }
-    end
-  end  
+ 
 
   def ticket_numbers_of_particular_color
     color = params[:color]
