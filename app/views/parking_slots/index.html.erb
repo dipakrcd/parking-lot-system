@@ -23,7 +23,7 @@
   
   <div style="margin-top: 3%">
     <table>
-        <% @parking_slots.each_slice(6) do |parking_slot_per_row| %>
+        <% @parking_slots.each_slice(ParkingSlot::NUMBER_OF_SLOT_PER_ROW) do |parking_slot_per_row| %>
         <tr>
             <% parking_slot_per_row.each do |parking_slot| %>
               <% if parking_slot.is_empty %>

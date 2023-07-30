@@ -10,5 +10,6 @@ Rails.application.routes.draw do
     end
   end
   resources :cars
+  resources :tickets, only: [:index]
   get 'cars/ticket_numbers_of_particular_color', to: 'cars#ticket_numbers_of_particular_color'
 end

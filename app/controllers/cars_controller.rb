@@ -20,18 +20,6 @@ class CarsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
- 
-
-  def ticket_numbers_of_particular_color
-    color = params[:color]
-    cars = Car.where(color: color)
-    if cars.present?
-      ticket_numbers = Ticket.joins(:car).where(cars: {color: color}).pluck(:id)
-      render json: { ticket_numbers: ticket_numbers }
-    else
-      render json: { message: "no cars available with #{color} color" }
-    end
   end 
 
   private

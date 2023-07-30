@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-number_of_parking_slots = 30
-number_of_slots_per_row = 6
+number_of_parking_slots = ParkingSlot::TOTAL_SLOT
+number_of_slots_per_row = ParkingSlot::NUMBER_OF_SLOT_PER_ROW
 n = number_of_parking_slots / number_of_slots_per_row
 entry_at_x = 0
 entry_at_y = 0
