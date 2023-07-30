@@ -1,0 +1,54 @@
+<h3>List of tickets<h3>
+<%= flash[:notice] %><br>
+
+<%= form_tag(tickets_path, method: "get") do %>
+    <div>
+      <%= label_tag(:registration_number, "registration_number") %>
+      <%= text_field_tag(:registration_number) %> 
+    </div>
+    <%= submit_tag("serach Tickets") %>
+<% end %>
+<br>
+<% if @ticket.present? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Ticket id</th>
+        <th>car_registration_number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @ticket.each do |ticket| %>
+        <tr>
+          <td><%= ticket.id %></td>
+          <td><%= ticket.car.registration_number %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <% if params[:registration_number].present? %>
+    <p>No tickets found with the registration_number'<%= params[:registration_number] %>'.</p>
+  <% end %>
+<% end %>
+
+<style>
+  table {
+    border-collapse: collapse;
+    width: %;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+</style>
